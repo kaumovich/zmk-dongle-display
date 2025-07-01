@@ -37,7 +37,7 @@ struct battery_state {
 struct battery_object {
     lv_obj_t *symbol;
     lv_obj_t *label;
-} battery_objects[CONFIG_ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS + SOURCE_OFFSET];
+} battery_objects[CONFIG_ZMK_SPLIT_CENTRAL_PERIPHERALS + SOURCE_OFFSET];
     
 static lv_color_t battery_image_buffer[ZMK_SPLIT_CENTRAL_PERIPHERAL_COUNT + SOURCE_OFFSET][5 * 8];
 
