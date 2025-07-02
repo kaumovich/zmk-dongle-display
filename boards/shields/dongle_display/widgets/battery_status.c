@@ -37,9 +37,9 @@ struct battery_state {
 struct battery_object {
     lv_obj_t *symbol;
     lv_obj_t *label;
-} battery_objects[ZMK_SPLIT_CENTRAL_PERIPHERAL_COUNT + SOURCE_OFFSET];
+} battery_objects[CONFIG_ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS + SOURCE_OFFSET];
     
-static lv_color_t battery_image_buffer[ZMK_SPLIT_CENTRAL_PERIPHERAL_COUNT + SOURCE_OFFSET][5 * 8];
+static lv_color_t battery_image_buffer[CONFIG_ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS + SOURCE_OFFSET][5 * 8];
 
 static void draw_battery(lv_obj_t *canvas, uint8_t level, bool usb_present) {
     lv_canvas_fill_bg(canvas, lv_color_black(), LV_OPA_COVER);
@@ -70,7 +70,7 @@ static void draw_battery(lv_obj_t *canvas, uint8_t level, bool usb_present) {
 }
 
 static void set_battery_symbol(lv_obj_t *widget, struct battery_state state) {
-    if (state.source >= ZMK_SPLIT_BLE_PERIPHERAL_COUNT + SOURCE_OFFSET) {
+    if (state.source >= CONFIG_ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS + SOURCE_OFFSET) {
         return;
     }
     LOG_DBG("source: %d, level: %d, usb: %d", state.source, state.level, state.usb_present);
@@ -143,7 +143,7 @@ int zmk_widget_dongle_battery_status_init(struct zmk_widget_dongle_battery_statu
 
     lv_obj_set_size(widget->obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
     
-    for (int i = 0; i < ZMK_SPLIT_CENTRAL_PERIPHERAL_COUNT + SOURCE_OFFSET; i++) {
+    for (int i = 0; i < CONFIG_ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS + SOURCE_OFFSET; i++) {
         lv_obj_t *image_canvas = lv_canvas_create(widget->obj);
         lv_obj_t *battery_label = lv_label_create(widget->obj);
 
